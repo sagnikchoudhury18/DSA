@@ -1,0 +1,25 @@
+public class Solution {
+    public ArrayList<Long> rangeSum(ArrayList<Integer> A, ArrayList<ArrayList<Integer>> B) {
+        ArrayList<Long> prefixSumArray = new ArrayList<Long>();
+        ArrayList<Long> results = new ArrayList<Long>();
+        for (int i = 0; i <A.size(); i++){
+            if (i==0){
+                prefixSumArray.add(Long.valueOf(A.get(i)));
+            } else {
+                prefixSumArray.add(Long.valueOf(prefixSumArray.get(i-1) + A.get(i)));
+            }
+        }
+        //System.out.println(prefixSumArray);
+       
+        for (int i = 0; i < B.size(); i++) {
+            if (B.get(i).get(0) == 1) {
+                results.add(prefixSumArray.get(B.get(i).get(1) - 1));
+            } else {
+                results.add(prefixSumArray.get(B.get(i).get(1) - 1) - prefixSumArray.get(B.get(i).get(0) - 1 -1));
+            }
+            
+        }
+        //System.out.println(results);
+        return results;
+    }
+}
