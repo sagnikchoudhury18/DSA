@@ -1,0 +1,52 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A) {
+        ArrayList<Integer> prefixSumArray = new ArrayList<Integer>();
+        int min = Integer.MAX_VALUE;
+        int pos = -1;
+        
+        for (int i=0; i<A.size(); i++){
+            if (i==0){
+                prefixSumArray.add(A.get(i));
+            } else {
+                prefixSumArray.add(prefixSumArray.get(i-1) + A.get(i));
+            }
+            
+        }
+        //System.out.println(prefixSumArray);
+
+        for (int i = 0; i < A.size(); i++) {
+            int sumLeft, sumRight;
+            if (i==0) {
+                sumLeft = 0;
+                //System.out.println ("Left sum: " + sumLeft);
+            } else {
+                sumLeft = getPrefixSum(prefixSumArray, 0, i-1);
+            }
+            if (i == A.size()-1) {
+                sumRight = 0;
+                //System.out.println ("Right sum: " + sumRight);
+            } else {
+                sumRight = getPrefixSum(prefixSumArray, i+1, A.size()-1);
+            }
+            //System.out.println("Sum left: " + sumLeft + "  " + "Sum right: "+ sumRight);
+            if (sumLeft == sumRight){
+                if (i < min) {
+                    pos = i;
+                }
+            }
+        }
+        //System.out.println(pos);
+        return pos;
+    }
+
+    public int getPrefixSum (ArrayList<Integer> prefixSumArray, int s, int e) {
+        //System.out.println ("s:" + s + "  " + "e: " + e);
+        if (s == 0) {
+            //System.out.println ("Left sum" + prefixSumArray.get(e) );
+            return prefixSumArray.get(e);
+        } else {
+            //System.out.println ("Right sum" + (prefixSumArray.get(e) - prefixSumArray.get(s-1)));
+            return prefixSumArray.get(e) - prefixSumArray.get(s-1);
+        }
+    }
+}

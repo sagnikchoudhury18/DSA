@@ -1,0 +1,14 @@
+public class Solution {
+    public ArrayList<Integer> solve(ArrayList<Integer> A) {
+        int product = 1;
+        for (int i = 0; i< A.size(); i++) {
+            product = product * A.get(i);
+        }
+        for (int i = 0; i< A.size(); i++) {
+            //System.out.println(product/A.get(i));
+            A.set(i, product/A.get(i));
+        }
+        //System.out.println(A);
+        return A;
+    }
+}
