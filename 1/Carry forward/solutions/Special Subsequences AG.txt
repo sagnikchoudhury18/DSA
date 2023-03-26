@@ -1,0 +1,17 @@
+public class Solution {
+    public int solve(String A) {
+        int countG = 0;
+        long ans = 0;
+        int res = 0;
+        for (int i=A.length()-1; i>=0; i--) {
+            if (A.charAt(i) == 'G'){
+                countG+=1;
+            } 
+            if (A.charAt(i) == 'A') {
+                ans += countG;
+            }
+        }
+        res =  (int) (ans%((long)Math.pow(10,9) + 7));
+        return res;
+    }
+}

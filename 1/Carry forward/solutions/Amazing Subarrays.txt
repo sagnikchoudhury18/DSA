@@ -1,0 +1,17 @@
+public class Solution {
+    public int solve(String A) {
+        A = A.toLowerCase();
+        long lengthA = A.length();
+        long res = 0;
+        ArrayList<Character> vowels = new ArrayList<Character>();
+        //System.out.println(A.charAt(0));
+        vowels.add('a'); vowels.add('e'); vowels.add('i'); vowels.add('o'); vowels.add('u');
+        for (long i=0; i<lengthA; i++) {
+            if(vowels.contains(Character.valueOf(A.charAt((int)i)))) {
+                res= (res + lengthA-i);
+            }
+        }
+        res = res%10003;
+        return (int)res;
+    }
+}
