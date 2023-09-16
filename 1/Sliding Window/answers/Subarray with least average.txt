@@ -1,0 +1,24 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A, int B) {
+        int sum = 0, startingIndex = 0;
+        int leastSum = Integer.MAX_VALUE;
+        for (int i=0; i<B; i++) {
+            sum+=A.get(i);
+        }
+        if (sum < leastSum) {
+            leastSum = sum;
+        }
+        int s = 1, e = B; 
+        while (e<A.size()) {
+            sum = sum-A.get(s-1);
+            sum = sum+A.get(e);
+            if (sum<leastSum){
+                leastSum = sum;
+                startingIndex = s;
+            }
+            s++;
+            e++;
+        }
+        return startingIndex;
+    }
+}

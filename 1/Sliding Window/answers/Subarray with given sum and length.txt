@@ -1,0 +1,17 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A, int B, int C) {
+        int s = 0, e = B-1, res;
+        while (e<A.size()){
+            int sum = 0;
+            for (int i=s; i<=e;i++){
+                sum+=A.get(i);
+            }
+            if(sum==C){
+                return 1;
+            }
+            s++;
+            e++;
+        }
+        return 0;
+    }
+}
