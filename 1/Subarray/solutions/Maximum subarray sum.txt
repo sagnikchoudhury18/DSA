@@ -1,0 +1,17 @@
+public class Solution {
+    public int maxSubarray(int A, int B, ArrayList<Integer> C) {
+        int maxSum = 0;
+        for (int s = 0; s<A; s++) {
+            int sum = 0;
+            for (int e = s; e < A; e++) {
+                sum += C.get(e);
+                if (sum>B) {
+                    sum = sum-C.get(e);
+                    break;
+                }
+            }
+            maxSum = Math.max(maxSum, sum);
+        }
+        return maxSum;
+    }
+}
