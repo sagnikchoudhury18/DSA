@@ -1,0 +1,62 @@
+public class Solution {
+    public ArrayList<ArrayList<Integer>> generateMatrix(int A) {
+        int[][] arr = new int[A][A];
+       
+        int n = A, val = 1;
+        int i=0,j=0;
+
+        while (n>0) {
+        for (int k=1; k<n; k++){
+            arr[i][j] = val;
+            val++;
+            j++;
+        }
+        
+        for (int k=1; k<n; k++){
+           arr[i][j] = val;
+           val++;
+           i++;
+        }
+
+        for (int k=1; k<n; k++){
+           arr[i][j] = val;
+           val++;
+           j--;
+        }
+
+        
+        for (int k=1; k<n; k++){
+           arr[i][j] = val;
+           val++;
+           i--;
+        }
+
+        //i=0, j=0
+        i++;
+        j++;
+        n-=2;
+    
+        }
+
+        //edge case in case of odd (when n is 1 the k loop will not run and then we come down and increment i and j and decreaase nby 2 which makes n as -1)
+        if (n==-1) {
+            //Now we need to go back to the center element so we do i-- and j--
+            i--;
+            j--;
+            arr[i][j]=val;
+
+        }
+
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<ArrayList<Integer>>();
+         
+        for (int r=0; r<A; r++){
+            ArrayList<Integer> arrayList = new ArrayList<Integer>();
+            for (int c=0; c<A; c++){
+                arrayList.add(arr[r][c]);
+            }
+            ans.add(arrayList);
+        }
+
+        return ans;
+    }
+}

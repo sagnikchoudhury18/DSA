@@ -1,0 +1,26 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A) {
+        int count = 0;
+        for (int i=1; i<A.size()-1; i++) {
+            
+            //no. of left eles
+            int left = 0;
+            for (int j=i-1; j>=0; j--) {
+                if (A.get(j)<A.get(i)){
+                    left+=1;
+                }
+            }
+
+            //no. of right eles 
+            int right = 0;
+            for (int j = i+1; j <A.size(); j++) {
+                if (A.get(j)>A.get(i)){
+                    right+=1;
+                }
+            }
+
+            count = count + (left*right);
+        }
+        return count;
+    }
+}
