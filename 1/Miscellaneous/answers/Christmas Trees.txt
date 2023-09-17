@@ -1,0 +1,29 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A, ArrayList<Integer> B) {
+        final int inf = (int)(Math.pow(10,9));
+        //System.out.println(inf);
+        int ans = inf;
+        for (int i=0; i<A.size(); i++){
+            int leftMin = inf, rightMin = inf;
+            for (int j=0; j<i; j++){
+                if(A.get(j)<A.get(i)){
+                    leftMin = Math.min(leftMin, B.get(j));
+                }
+            }
+            for (int j=i+1; j<B.size(); j++){
+                if(A.get(j)>A.get(i)){
+                    rightMin = Math.min(rightMin, B.get(j));
+                }
+            }
+            //System.out.println(leftMin+B.get(i)+rightMin);
+            int tempAns = leftMin+B.get(i)+rightMin;
+            ans = Math.min(ans, tempAns);
+            
+        }
+        if(ans==inf)
+            return -1;
+        else
+            return ans;
+       
+    }
+}

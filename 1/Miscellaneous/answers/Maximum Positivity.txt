@@ -1,0 +1,59 @@
+public class Solution {
+    public ArrayList<Integer> solve(ArrayList<Integer> A) {
+        int pos=Integer.MAX_VALUE, ans=Integer.MIN_VALUE, count = 0;
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        for (int i=0; i<A.size(); i++){
+            if(A.get(i)>0){
+                count+=1;
+            }
+        }
+
+        if (count == A.size()){
+            pos = 0;
+        }
+
+        for (int i=0; i<A.size(); i++){
+            if (A.get(i)>0){
+                int leftPos = i;
+                int left = 0;
+                for (int k=i-1; k>=0;k--){
+                    if(A.get(k)>0) {
+                        left+=1;
+                    } else {
+                        leftPos = k+1;
+                        break;
+                    }
+                }
+
+                int right = 0;
+                for (int k=i+1; k<A.size(); k++){
+                    if(A.get(k)>0) {
+                        right+=1;
+                    } else {
+                        break;
+                    }
+                }
+                if (left+right+1>ans){
+                    ans = left+right+1;
+                    pos = leftPos;
+                } else if (left+right+1 == ans){
+                    ans = left+right+1;
+                    pos = Math.min(pos, leftPos);
+                }
+
+                
+            }
+        }
+        //System.out.println(ans);
+        //System.out.println(pos);
+        for (int k=pos; k<A.size(); k++){
+            if(A.get(k)>0){
+                result.add(A.get(k));
+            } else {
+                break;
+            }
+        }
+
+        return result;
+    }
+}
