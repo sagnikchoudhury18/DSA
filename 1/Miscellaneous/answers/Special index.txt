@@ -1,0 +1,42 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A) {
+        
+        int[] prefixEvenArray = new int[A.size()];
+        prefixEvenArray[0] = A.get(0);
+        for (int i=1; i<A.size(); i++){
+            if (i%2==0){
+                prefixEvenArray[i] = prefixEvenArray[i-1]+A.get(i);
+            } else {
+                prefixEvenArray[i] = prefixEvenArray[i-1];
+            }
+        }
+
+        int[] prefixOddArray = new int[A.size()];
+        prefixOddArray[0] = 0;
+        for (int i=1; i<A.size(); i++){
+            if (i%2!=0){
+                prefixOddArray[i] = prefixOddArray[i-1]+A.get(i);
+            } else {
+                prefixOddArray[i] = prefixOddArray[i-1];
+            }
+        }
+
+        int count = 0;
+        for(int i=0; i<A.size(); i++){
+            int sumEven = prefixOddArray[A.size()-1] - prefixOddArray[i];
+            if(i!=0){
+                sumEven+=prefixEvenArray[i-1];
+            }
+            int sumOdd = prefixEvenArray[A.size()-1] - prefixEvenArray[i];
+            if(i!=0){
+                sumOdd+=prefixOddArray[i-1];
+            }
+            if(sumEven==sumOdd){
+                count+=1;
+            }
+        }
+
+        return count;
+    }
+
+}

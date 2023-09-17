@@ -1,0 +1,47 @@
+public class Solution {
+    public int solve(String A) {
+        int count=0, ans=0;
+        for (int i=0; i<A.length(); i++){
+            if(A.charAt(i)=='1'){
+                count+=1;
+            }
+        }
+
+        if (count == A.length()){
+            return count;
+        }
+
+        for (int i=0; i<A.length(); i++){
+            if (A.charAt(i)=='0'){
+
+                int left = 0;
+                for (int k=i-1; k>=0;k--){
+                    if(A.charAt(k)=='1') {
+                        left+=1;
+                    } else {
+                        break;
+                    }
+                }
+
+                int right = 0;
+                for (int k=i+1; k<A.length(); k++){
+                    if(A.charAt(k)=='1') {
+                        right+=1;
+                    } else {
+                        break;
+                    }
+                }
+
+                //to check for spare 1
+                if (count>left+right){
+                    ans = Math.max(ans, left + right + 1);
+                } else {
+                    ans = Math.max(ans, left + right);
+                }
+
+            }
+        }
+
+        return ans;
+    }
+}
