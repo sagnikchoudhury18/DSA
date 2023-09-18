@@ -1,0 +1,17 @@
+public class Solution {
+    public int solve(String A) {
+        int check = checkPalindrom(A, 0, A.length()-1);
+        return check;
+    }
+
+    public int checkPalindrom(String B, int start, int end){
+        
+        if(start>=end){
+            return 1;
+        }
+        if (B.charAt(start)!=B.charAt(end)){
+            return 0;
+        }
+        return checkPalindrom(B, start+1, end-1);
+    }
+}
