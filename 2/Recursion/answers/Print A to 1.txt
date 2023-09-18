@@ -1,0 +1,15 @@
+public class Solution {
+    public void solve(int A) {
+        printNumbers(A);
+        System.out.println("");
+    }
+
+    public void printNumbers(int A){
+        if(A==1){
+            System.out.print(A+ " ");
+            return;
+        }
+        System.out.print(A+" ");
+        printNumbers(A-1);
+    }
+}

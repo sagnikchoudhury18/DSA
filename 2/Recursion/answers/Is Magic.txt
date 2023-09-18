@@ -1,0 +1,23 @@
+public class Solution {
+    public int solve(int A) {
+        int sum = 0;
+        sum = sumOfDigits(A);
+        while (sum/10>0){
+         sum = sumOfDigits(sum);
+        }
+        if(sum==1){
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public int sumOfDigits(int A){
+        if(A/10 == 0){
+            return A;
+        }
+        int sum = sumOfDigits(A/10)+A%10;
+        //System.out.println(sum);
+        return sum;
+    }
+}

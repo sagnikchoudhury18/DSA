@@ -1,0 +1,24 @@
+public class Solution {
+    public int pow(int A, int B, int C) {
+    if(A<0){
+        A = (A%C+C)%C;
+    }
+    int res = calc(A, B, C);
+    return res;
+    }
+
+    public int calc(int A, int B, int C){
+        if(A==0){
+            return 0;
+        }
+        if(B==0){
+            return 1;
+        }
+        long p=calc(A,B/2,C);
+        if (B%2==0){  //for even powers
+            return (int)(p%C * p%C)%C;
+        } else { //for odd powers
+            return (int)((p*p)%C  * A%C)%C;    
+        }
+    }
+}

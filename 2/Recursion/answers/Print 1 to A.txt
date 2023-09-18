@@ -1,0 +1,14 @@
+public class Solution {
+    public void solve(int A) {
+        printNumbers(A);
+        System.out.println("");
+    }
+
+    public void printNumbers(int A){
+        if(A==0){
+            return;
+        }
+        printNumbers(A-1);
+        System.out.print(A+" ");
+    }
+}
