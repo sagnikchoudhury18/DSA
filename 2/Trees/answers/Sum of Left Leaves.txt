@@ -1,0 +1,42 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+    public int solve(TreeNode A) {
+        int sumLeft  = traverse(A);
+        return sumLeft;
+    }
+
+    public int traverse(TreeNode A){
+
+        if (A == null) {
+                return 0;
+            }
+
+            int sum = 0;
+
+            // Check if the left child is a leaf node and add its value to the sum
+            if (A.left != null && A.left.left == null && A.left.right == null) {
+                sum += A.left.val;
+            }
+
+            // Recursively call the function on the left and right subtrees
+            sum += solve(A.left);
+            sum += solve(A.right);
+
+            return sum;
+
+    }
+
+    
+}

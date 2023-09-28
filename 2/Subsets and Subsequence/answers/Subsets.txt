@@ -1,0 +1,35 @@
+public class Solution {
+    ArrayList<ArrayList<Integer>> arr;
+    public int[][] subsets(int[] A1) {
+       
+        arr=new ArrayList<ArrayList<Integer>>();
+        Arrays.sort(A1);
+        ArrayList<Integer> temp=new ArrayList<>();
+        arr.add(new ArrayList(temp));
+        ArrayList<Integer> A = new ArrayList<>();
+        for(int i: A1){ 
+            A.add(i); 
+        }
+        createAllSubsets(A, temp, 0);
+
+        int[][] res = new int[arr.size()][A1.length];
+        for (int i=0; i<arr.size(); i++){
+            int[] res1 = arr.get(i).stream().mapToInt(l -> l).toArray();
+            res[i] = res1;
+        }
+
+        return res;
+    }
+    void createAllSubsets(ArrayList<Integer> A,ArrayList<Integer> temp, int idx )
+    {
+        if(idx==A.size())
+        {
+            return ;
+        }
+        temp.add(A.get(idx));
+        arr.add(new ArrayList(temp));
+        createAllSubsets(A, temp, idx+1);
+        temp.remove(temp.size()-1);
+        createAllSubsets(A, temp, idx+1);
+    }
+}
