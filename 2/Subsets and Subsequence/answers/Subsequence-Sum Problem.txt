@@ -1,0 +1,27 @@
+public class Solution {
+    public int solve(int[] A, int B) {
+        boolean res = subsets(A, B, 0, 0);
+        if(res){
+            return 1;
+        } else{
+            return 0;
+        }
+    }
+
+    boolean subsets(int [] A, int B, int idx, int sum){
+        if(idx == A.length){
+            return false;
+        }
+
+        sum+=A[idx];
+        if(sum==B){
+            return true;
+        }
+
+        boolean res1 = subsets(A, B, idx+1, sum);
+        sum-=A[idx];
+        boolean res2 = subsets(A, B,idx+1, sum);
+
+        return res1||res2;
+    }
+}
