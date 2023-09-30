@@ -1,0 +1,24 @@
+public class Solution {
+    
+    public int solve(ArrayList<Integer> A) {
+        Collections.sort(A);
+        int mod = 1000000007;
+        double sumOfAllMaxes = 0;
+        double sumOfAllMins = 0;
+        for (int i=0; i<A.size(); i++) {
+
+            //Number of elements on the left A[i] is greater than
+            double count1 = (Math.pow(2,i))%mod;
+            double val1 = (count1 * A.get(i))%mod;
+            sumOfAllMaxes += val1 % mod;
+
+            //Number of elements on the right A[i] is less than
+            double count2 = (Math.pow(2, A.size()-i-1))%mod;
+            double val2 = (count2 * A.get(i))%mod;
+            sumOfAllMins += val2 % mod;
+        }
+        double res = (sumOfAllMaxes%mod - sumOfAllMins%mod + mod)%mod;
+        return (int)res;
+
+    }
+}

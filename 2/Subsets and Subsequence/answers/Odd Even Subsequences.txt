@@ -1,0 +1,19 @@
+public class Solution {
+    public int solve(int[] A) {
+        int count = 1;
+        boolean evenFlag = false;
+        if(A[0]%2==0){
+            evenFlag = true;
+        }
+        for(int i=1; i<A.length; i++){
+            if(evenFlag && A[i]%2!=0){
+                count+=1;
+                evenFlag = false;
+            } else if(!evenFlag && A[i]%2 == 0){
+                count+=1;
+                evenFlag = true;
+            }
+        }
+        return count;
+    }
+}
