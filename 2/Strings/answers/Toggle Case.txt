@@ -1,0 +1,19 @@
+public class Solution {
+    public String solve(String A) {
+        //Observations
+        //Strings are immutable so it is better to use StringBuilder
+        StringBuilder str=new StringBuilder(A);
+        for(int i=0; i<A.length(); i++){
+            if(A.charAt(i)>='a' && A.charAt(i)<='z'){
+              Character toLower=(char)(A.charAt(i)-32);
+              str.setCharAt(i, toLower);
+            }
+            if(A.charAt(i)>='A' && A.charAt(i)<='Z'){
+              Character toUpper=(char)(A.charAt(i)+32);
+              str.setCharAt(i, toUpper);
+            }
+            
+        }
+        return str.toString();
+    }
+}

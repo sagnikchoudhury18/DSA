@@ -1,0 +1,26 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A) {
+        Collections.sort(A, Collections.reverseOrder());
+        //System.out.println(A);
+        int count = 0;
+        int ans = 0;
+        if(A.get(0)==count){
+            ans+=1;
+        }
+        for (int i=1; i<A.size(); i++){
+            if(A.get(i)!=A.get(i-1)){
+                count=i;
+                if(count == A.get(i)){
+                ans+=1;
+            }
+            }
+           
+        }
+        if(ans>0){
+            return ans;
+        } else {
+            return -1;
+        }
+        
+    }
+}

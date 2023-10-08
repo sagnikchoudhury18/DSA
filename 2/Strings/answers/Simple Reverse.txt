@@ -1,0 +1,20 @@
+public class Solution {
+    public String solve(String A) {
+        StringBuilder sb= new StringBuilder(A);
+        int i=0;
+        int j=A.length()-1;
+       
+        while (j>i) {
+            char char_i=sb.charAt(i);
+            char char_j=sb.charAt(j);
+           
+            sb.setCharAt(i, char_j);
+            sb.setCharAt(j, char_i);
+           
+            i++;
+            j--;
+        }
+
+        return sb.toString();
+    }
+}
