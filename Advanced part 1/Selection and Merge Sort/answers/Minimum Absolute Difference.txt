@@ -1,0 +1,13 @@
+public class Solution {
+    public int solve(int[] A) {
+        Arrays.sort(A);
+        int min_val = Integer.MAX_VALUE;
+        for(int i=1; i<A.length; i++){
+            int min = Math.abs(A[i]-A[i-1]);
+            if(min<min_val){
+                min_val = min;
+            }
+        }
+        return min_val;
+    }
+}
