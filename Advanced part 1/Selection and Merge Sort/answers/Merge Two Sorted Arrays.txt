@@ -1,0 +1,31 @@
+public class Solution {
+    // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+    public int[] solve(final int[] A, final int[] B) {
+        int P1=0,P2=0,P3=0;
+        int[] M=new int[A.length+B.length];
+        while(P1<A.length && P2<B.length){
+            if(A[P1]<=B[P2]){
+                M[P3]=A[P1];
+                P1++;
+                P3++;
+            }else{
+                M[P3]=B[P2];
+                P2++;
+                P3++;
+            }
+        }
+        //edge case - 1 copy remaining all element from A
+        while(P1<A.length){
+            M[P3]=A[P1];
+            P1++;
+            P3++;
+        }
+        //edge case - 2 copy remaining all element from B
+        while(P2<B.length){
+            M[P3]=B[P2];
+            P2++;
+            P3++;
+        }
+        return M;
+    }
+}

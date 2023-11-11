@@ -1,0 +1,13 @@
+public class Solution {
+    public int[] solve(int[] A) {
+        Arrays.sort(A);
+        long min_magic = 0, max_magic = 0;
+        for(int i=1; i <A.length; i+=2){
+            min_magic += A[i]-A[i-1];
+        }
+        for(int i=0; i<A.length/2; i++){
+            max_magic += A[i+(A.length/2)] - A[i];
+        }
+        return new int[] {(int)(max_magic%1000000007), (int)(min_magic%1000000007)};
+    }
+}

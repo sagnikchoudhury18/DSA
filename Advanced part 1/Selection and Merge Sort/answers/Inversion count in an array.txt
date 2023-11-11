@@ -1,0 +1,62 @@
+public class Solution {
+    public int solve(int[] A) {
+        int res = invert(A, 0, A.length-1);
+        return res;
+    }
+
+    public int invert (int[] A, int start, int end){
+        if(start<end){
+            int mid = (start + end)/2;
+            int L = invert(A,start,mid) % 1000000007;
+            int R = invert(A,mid+1,end) % 1000000007;
+            int C = merge(A,start,mid, end) % 1000000007;
+            return (L + R + C)%1000000007;
+        } else {          
+            return 0;
+        }
+    }
+
+    public int merge(int A[],int start, int mid, int end){
+        int p1=start, p2=mid+1, p3=0, invCount=0;
+        int[] temp = new int[end-start+1];
+
+
+        //  while(p1<=mid && p2<=end){
+        //     if(A[p1]>A[p2]){
+        //         invCount+=(mid-p1+1);
+        //         p2++;
+        //     } else {
+        //         p1++;
+        //     }
+        // }
+
+        p1 = start; p2=mid+1;
+
+        while(p1<=mid && p2<=end){
+            if(A[p1]<=A[p2]){
+                temp[p3] = A[p1];
+                p1++;
+                p3++;
+            } else {
+                temp[p3] = A[p2];
+                p2++;
+                p3++;
+                invCount+=(mid-p1+1);
+            }
+        }
+        while(p1<=mid){
+            temp[p3]=A[p1];
+            p1++;
+            p3++;
+        }
+        while(p2<=end){
+            temp[p3]=A[p2];
+            p2++;
+            p3++;
+        }
+        for (int i=start; i<=end; i++){
+            A[i]=temp[i-start];
+        }
+        return invCount;
+    }
+}
