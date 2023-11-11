@@ -1,0 +1,46 @@
+public class Solution {
+    public ArrayList<Integer> dNums(ArrayList<Integer> A, int B) {
+        HashMap<Integer, Integer> hm = new HashMap<>();
+        ArrayList<Integer> res = new ArrayList<>();
+        for (int i=0; i<B; i++){
+            if(hm.keySet().contains(A.get(i))){
+                hm.put(A.get(i), hm.get(A.get(i))+1);
+            } else {
+                hm.put(A.get(i),1);
+            }
+        }
+        int distinct = hm.keySet().size();
+        res.add(distinct);
+
+        int pointerEleComingIn = B;
+        int pointerEleMovingOut = 0;
+        while(pointerEleComingIn<A.size()){
+
+           //For removing the starting ele in window
+           if(hm.keySet().contains(A.get(pointerEleMovingOut))){
+               hm.put(A.get(pointerEleMovingOut), hm.get(A.get(pointerEleMovingOut))-1);
+               if(hm.get(A.get(pointerEleMovingOut)) == 0){
+                   hm.remove((A.get(pointerEleMovingOut)));
+               }
+           }
+
+           //For element coming in
+           if(hm.keySet().contains(A.get(pointerEleComingIn))){
+               hm.put(A.get(pointerEleComingIn), hm.get(A.get(pointerEleComingIn))+1);
+           }else{
+               hm.put(A.get(pointerEleComingIn),1);
+           }
+
+            distinct = hm.keySet().size();
+            res.add(distinct);
+
+            pointerEleComingIn++;
+            pointerEleMovingOut++;
+
+        }//eof
+
+        return res;
+
+
+    }
+}
