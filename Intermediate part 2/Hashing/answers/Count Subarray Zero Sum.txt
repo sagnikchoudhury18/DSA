@@ -1,0 +1,18 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A) {
+       int prefsum=0;
+        int count=0;
+        HashMap<Integer,Integer> map=new HashMap<Integer,Integer>();
+        map.put(0,1);  //cases when the prefix sum itself becomes zero
+        for(int i=0;i<A.size();i++){
+            prefsum+=A.get(i);
+            if(map.containsKey(prefsum)){
+                count+=map.get(prefsum);
+                map.put(prefsum,map.get(prefsum)+1);  
+            }        
+            else
+                map.put(prefsum,1);
+        }return count%1000000007;      
+
+    }
+}

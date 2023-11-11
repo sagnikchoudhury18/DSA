@@ -1,0 +1,26 @@
+public class Solution {
+    public ArrayList<Integer> solve(ArrayList<Integer> A, int B) {
+        HashMap<Long, Integer> hm = new HashMap<Long, Integer>();
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        ans.add(-1);
+        //why Integer cannot be convereted to Long
+        //why long can be stored in Long
+        long sum = A.get(0);
+        hm.put(sum, 0); //sum,location of the sum
+        for (int i=1; i<A.size(); i++){
+            sum+=A.get(i);
+            long req = sum-B;
+            //System.out.println(sum);
+            if(req == 0){
+                List<Integer> sublist = A.subList(0, i+1);
+                return  new ArrayList<Integer>(sublist);
+            } 
+            if(hm.containsKey(req)){
+                List<Integer> sublist = A.subList(hm.get(req)+1,i+1);
+                return new ArrayList<Integer>(sublist);
+            }
+            hm.put(sum,i);
+        }
+        return ans;
+    }
+}

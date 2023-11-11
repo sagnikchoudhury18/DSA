@@ -1,0 +1,22 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A, int B) {
+       HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
+       long countPairs = 0;
+       final int m = (int)(1e9 + 7);
+        for(int i=0; i<A.size(); i++){
+            //System.out.println(hm);
+            Integer k = Integer.valueOf(B) - A.get(i);
+            if(hm.containsKey(k)){
+                // //The second problem is due to the method signature for Math.pow; see the javadoc. It returns the result as a double. You then attempte to return the double as an int, and that is a lossy conversion.
+                countPairs = (countPairs + hm.get(k))%m;
+            } if(hm.containsKey(A.get(i))) {
+                hm.put(A.get(i), hm.get(A.get(i))+1);
+            } else {
+                hm.put(A.get(i),1);
+            }
+        }
+        
+        return (int)countPairs;
+        
+    }
+}

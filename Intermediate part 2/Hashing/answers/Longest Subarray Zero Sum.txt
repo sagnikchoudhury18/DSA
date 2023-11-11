@@ -1,0 +1,23 @@
+public class Solution {
+    public int solve(ArrayList<Integer> A) {
+        HashMap<Long, Integer> hm = new HashMap<Long, Integer>();
+        //why Integer cannot be convereted to Long
+        //why long can be stored in Long
+        long sum = A.get(0);
+        int length = 0;
+        hm.put(sum, 0); //sum,location of the sum
+        for (int i=1; i<A.size(); i++){
+            sum+=A.get(i);
+            if(sum==0){
+                length = i+1;
+            }
+            if(hm.get(sum)!=null){
+                length = Math.max(length, i-hm.get(sum));
+            }
+            else{
+                hm.put(sum,i);
+            }
+        }
+        return length;
+    }
+}
