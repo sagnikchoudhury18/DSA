@@ -1,0 +1,19 @@
+public class Solution {
+    public int[] subUnsort(int[] A) {
+        int[] l = Arrays.copyOf(A, A.length);
+        Arrays.sort(l);
+        int start = A.length;
+        int end = 0;
+        for (int i = 0; i < l.length; i++) {
+              if (A[i] != l[i]) {
+                 start = Math.min(start, i);
+                 end = Math.max(end, i);
+              }
+      }
+        if(end==0){
+            return new int[]{-1};
+        }else {
+            return new int[]{start, end};
+        }
+    }
+}
