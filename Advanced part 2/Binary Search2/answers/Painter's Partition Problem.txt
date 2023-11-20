@@ -1,0 +1,47 @@
+public class Solution {
+    public int paint(int A, int B, int[] C) {
+
+        int mod = 10000003;
+        int l = Integer.MIN_VALUE;
+        int h = 0;
+        for(int i=0; i<C.length; i++){
+            if(C[i]>l){
+                l = C[i];
+            }
+            h += C[i];
+        }
+       
+
+        long ans = 0;
+
+        while (l<=h){
+            int mid = l + (h-l)/2;
+            if (check (mid, C, A)){
+                ans = mid;
+                h = mid-1;
+            } else {
+                l = mid+1;
+            }
+        }
+
+        return  (int) ((ans*(long)B)%mod);
+    }
+
+        boolean check (int mid, int[] C, int A){
+            int workers=1,lengthOfBoard=0;
+
+            for (int i=0; i<C.length; i++){
+                lengthOfBoard+=C[i];
+                if(lengthOfBoard>mid){
+                    workers+=1;
+                    lengthOfBoard = C[i];
+                    if(workers>A){
+                        return false;
+                    }
+                }
+            }
+            return true;
+            
+        }
+    
+}

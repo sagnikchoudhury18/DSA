@@ -1,0 +1,37 @@
+public class Solution {
+    public int solve(int[] A, int B) {
+        int N=A.length;
+        Arrays.sort(A);
+        int h=A[N-1]-A[0];
+        int l=Integer.MAX_VALUE,ans=0;
+        for(int i=0;i<N-1;i++){
+            l=Math.min(l,A[i+1]-A[i]);
+        }
+
+        while(l<=h){
+            int mid = l + (h-l)/2;
+            if(check(mid, A, B)){
+                ans = mid;
+                l =  mid+1;
+            } else {
+                h = mid-1;
+            }
+        }
+        return ans;
+    }
+
+    boolean check(int mid, int[] A, int B){
+        int last_placed = A[0];
+        int cow = 1;
+        for (int i=0; i<A.length; i++){
+            if(A[i]-last_placed >=mid){
+                cow+=1;
+                last_placed = A[i];
+                if (cow == B){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
