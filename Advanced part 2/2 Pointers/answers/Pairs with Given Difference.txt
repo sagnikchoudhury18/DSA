@@ -1,0 +1,28 @@
+public class Solution {
+    public int solve(int[] A, int B) {
+        Arrays.sort(A);
+        int i=0, j=1, count=0;
+        while(j<A.length){
+            if(i>0 && A[i]==A[i-1] && A[j]==A[j-1]){//edge case -> A[]=[1, 1, 1, 2, 2] B=0 it will skip the duplicate elements
+                i++;
+                j++;
+                continue;//continue->skip the current iteration
+            }
+            if(A[j]-A[i] == B){
+                count++;
+                i++;
+                j++;
+            } else if(A[j]-A[i]<B){
+                j++;
+            
+            } else if (A[j]-A[i]>B){
+                i++;
+                if(i==j){
+                    j++;
+                }
+            }
+        }
+        return count;
+        
+    }
+}
