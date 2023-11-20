@@ -1,0 +1,23 @@
+public class Solution {
+    public int[] solve(int[] A, int B) {
+        int start = 0, end = 0;
+        int sum = A[0];
+        while (end < A.length) {
+
+            if (sum == B) {
+            return Arrays.copyOfRange(A, start, end+1);
+            } else if (sum < B) {
+            end++;
+            if (end < A.length) {
+            sum += A[end];
+            }
+            } else {
+            sum -= A[start];
+            start++;
+            }
+        }
+        return new int[]{-1};
+
+
+    }
+}
