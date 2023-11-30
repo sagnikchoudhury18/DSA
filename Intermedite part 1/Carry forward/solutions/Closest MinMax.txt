@@ -32,3 +32,15 @@ public class Solution {
         return result;
     }
 }
+
+
+
+
+/*
+1. Frist get the min and max from array
+2. Next the closest pair can either be
+	min-------max   OR max------min
+If you get a max element and min is not yet found just note its pos and similarly for min
+Once you have both the index just check for there difference and store in result based on min difference
+
+*/
