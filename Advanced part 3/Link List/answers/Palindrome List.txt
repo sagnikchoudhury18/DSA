@@ -1,0 +1,28 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     ListNode(int x) { val = x; next = null; }
+ * }
+ */
+public class Solution {
+    public int lPalin(ListNode A) {
+        ListNode reverse=null; // the idea is to create another reverse linkedList and iterate that with fprward one
+        ListNode forward=A;
+        while(forward!=null){
+        ListNode newNode=new ListNode(forward.val);
+        newNode.next=reverse;
+        reverse=newNode;
+        forward=forward.next; 
+        }
+        while(A!=null){
+        if(A.val!=reverse.val){
+        return 0;
+        }
+        A=A.next;
+        reverse=reverse.next;
+        }
+        return 1;
+    }
+}
