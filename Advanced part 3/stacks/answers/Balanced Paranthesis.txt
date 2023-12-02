@@ -1,0 +1,42 @@
+public class Solution {
+    public int solve(String A) {
+        /*
+        1. For every closing bracket get its corresponding  opening bracket.
+        2. in case you get a opening bracket just add it to the Stack.
+        */
+        
+        Stack <Character> crStk = new Stack<>();
+
+        for(int i = 0; i < A.length(); i++){
+            char c = A.charAt(i);
+            char opening = getCorrespondingOpeningBracket(c);
+
+            if( !crStk.empty() && crStk.peek() == opening ) {
+                crStk.pop(); // Gets executed if the opening and closing brackets exis adjacent to each other :
+            } 
+            else crStk.push(c);
+        }
+
+        if((crStk.empty())){
+            return 1;
+        } else {
+            return 0;
+        }
+
+    }
+
+
+    public char getCorrespondingOpeningBracket(char c) {
+            if (c == '}'){
+                return '{';
+            } else if (c == ']'){
+                return '[';
+            } else if (c==')'){
+                return '(';
+            } else {
+                return '0';
+            }
+
+    }
+    
+}

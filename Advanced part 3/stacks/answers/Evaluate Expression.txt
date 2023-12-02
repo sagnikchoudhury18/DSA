@@ -1,0 +1,54 @@
+public class Solution {
+    public int evalRPN(String[] A) {
+        Stack<Integer> stack = new Stack<>();
+        //iterate over the String[] A
+        for(int i = 0; i < A.length; i++ ) {
+
+            // Using Switch Case to do the given RPN arithmetic expressions("+","-","/","*".....)
+
+            switch ( A[i] ) {//it will check the current element in the position A[i] whether it is number or "+","-","*","/"
+
+                case "+": // if it is "+"
+                //in stack the number is stored so it will first pop the b and then a
+                int b = stack.pop();
+                int a = stack.pop();
+                stack.push(a + b);//it will do it as per given case condition & push back to the stack
+                break;//break the current iteration
+
+                case "-": // if it is "-"
+                //in stack the number is stored so it will first pop the b and then a
+                b = stack.pop();
+                a = stack.pop();
+                stack.push(a - b);//it will do it as per given case condition & push back to the stack
+                break;//break the current iteration
+
+                case "*": // if it is "*"
+                //in stack the number is stored so it will first pop the b and then a
+                b = stack.pop();
+                a = stack.pop();
+                stack.push(a * b);//it will do it as per given case condition & push back to the stack
+                break;//break the current iteration
+
+                case "/": // if it is "/"
+                //in stack the number is stored so it will first pop the b and then a
+                b = stack.pop();
+                a = stack.pop();
+                stack.push(a / b);//it will do it as per given case condition & push back to the stack
+                break;//break the current iteration
+
+                //this expressions is not given in the question but if we need some expressions we can add it
+                case "%": // if it is "%"
+                //in stack the number is stored so it will first pop the b and then a
+                b = stack.pop();
+                a = stack.pop();
+                stack.push(a % b);//it will do it as per given case condition & push back to the stack
+                break;//break the current iteration
+
+                default: //this is for apart from the arithmetic expressions numbers ex:( 0 - 9)
+                stack.push(Integer.parseInt(A[i]));
+                break;
+            }
+        }
+        return stack.pop();
+    }
+}
