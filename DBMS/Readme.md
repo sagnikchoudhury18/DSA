@@ -32,4 +32,3 @@
     b. Cascade: Reflecting the changes in the table which contains the foreign key
     c. Set Null: The Fk col should not have NOT NULL on it for this.
     d. Set Default
-    
