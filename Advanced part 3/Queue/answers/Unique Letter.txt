@@ -1,0 +1,27 @@
+public class Solution {
+    public String solve(String A) {
+          //create a HashMap to keep the Character and it's freq
+        HashMap<Character,Integer> map = new HashMap<>();
+        //create a Queue to iterate over the Character and create the first non reapting charatcers
+        Queue<Character> q = new LinkedList<>();
+        //here string is Immutable we can make change in string so we are taking StringBuilder.
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<A.length();i++){
+            //iterate over the String and add it to Queue & HashMap
+            q.add(A.charAt(i));
+            map.put(A.charAt(i),map.getOrDefault(A.charAt(i),0)+1);
+            //if the freq is greater than 1 then it's reapting charatcers so remove from the Queue
+            while(!q.isEmpty() && map.get(q.peek())>1){
+                q.remove();
+            }
+            //if the Queue is Empty then we can add # to StringBuilder if not then add the front element of the Queue
+            if(q.isEmpty()){
+                sb.append('#');
+            }else{
+                sb.append(q.peek());
+            }
+        }
+        //return to String toString is used to convert the StringBuilder to string
+        return sb.toString();
+    }
+}

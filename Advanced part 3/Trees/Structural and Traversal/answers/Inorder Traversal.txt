@@ -1,0 +1,36 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ArrayList<Integer> inorderTraversal(TreeNode A) {
+          //create Array list for storing node data
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        //call inorder method. here we are passing arraylist ans as reference
+        inOrder(A,ans);
+        //return ans. ans will have data of all nodes
+        return ans;
+    }
+
+    public void inOrder(TreeNode A, ArrayList<Integer> ans){
+        if(A == null){
+            //if no child node found for leaf the return nothing
+            return;
+        }
+        //Traverse left sub tree
+        inOrder(A.left,ans);
+        //Add data of current tree. since it is in order we are adding in between left sub tree and right sub tree
+        ans.add(A.val);
+        //Traverse Right sub tree
+        inOrder(A.right,ans);
+    }
+}
