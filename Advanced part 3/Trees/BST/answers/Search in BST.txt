@@ -1,0 +1,43 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+    int found =0;
+
+    public int solve(TreeNode A, int B) {
+        Preorder(A,B);
+        return found;
+    }
+
+     public void Preorder(TreeNode temp, int Btemp)
+    {
+        if (temp == null)
+            return;
+
+        if(temp.val == Btemp)
+        {  
+            found =1;
+            return;
+        }
+
+        //checking whether to go left or right
+        if(Btemp<=temp.val)
+        {
+            Preorder(temp.left, Btemp);
+        }
+        else
+        {
+            Preorder(temp.right, Btemp);
+        }    
+    }
+}

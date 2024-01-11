@@ -1,0 +1,62 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+    public class Info {
+        int min;
+        int max;
+        int size;
+        boolean isBST;
+    }
+
+    public Info validate (TreeNode node){
+
+        if (node == null) {
+            Info nullInfo = new Info();
+            nullInfo.min = Integer.MAX_VALUE;
+            nullInfo.max = Integer.MIN_VALUE;
+            nullInfo.size = 0;
+            nullInfo.isBST = true;
+
+            return nullInfo;
+        }
+
+        Info leftInfo = validate(node.left);
+        Info  rightInfo = validate(node.right);
+
+        Info resultInfo = new Info();
+
+        if(leftInfo.isBST && rightInfo.isBST && leftInfo.max<node.val && rightInfo.min>node.val){
+            resultInfo.size = leftInfo.size + rightInfo.size + 1;
+            resultInfo.isBST = true;
+        } else {
+            resultInfo.size = Math.max (leftInfo.size, resultInfo.size);
+            resultInfo.isBST = false;
+        }
+
+        resultInfo.min = Math.min(leftInfo.min, rightInfo.min);
+        resultInfo.min = Math.min(resultInfo.min, node.val);
+
+        resultInfo.max = Math.max(leftInfo.max, rightInfo.max);
+        resultInfo.max = Math.max(resultInfo.max, node.val);
+
+        return resultInfo;
+
+
+    }
+
+    public int solve(TreeNode A) {
+        Info result = validate (A);
+        return result.size;
+    }
+}

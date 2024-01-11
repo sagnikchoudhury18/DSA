@@ -1,0 +1,36 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+    // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+    public TreeNode sortedArrayToBST(final int[] A) {
+        if(A.length==0) return null;
+        
+        // Find the middle index of the array
+        int mid = (A.length)/2;
+        
+        // Create a new tree node with the middle element of the array as the root of the tree.
+        TreeNode root = new TreeNode(A[mid]);
+        
+        // Recursively construct the left subtree
+        // The left subtree will be constructed from the elements in the array from index 0 to mid-1
+        root.left = sortedArrayToBST(Arrays.copyOfRange(A, 0, mid));
+        
+        // Recursively construct the right subtree
+        // The right subtree will be constructed from the elements in the array from index mid+1 to the end
+        root.right = sortedArrayToBST(Arrays.copyOfRange(A, mid+1, A.length));
+        
+        // Return the root of the constructed binary search tree
+        return root;
+    }
+}
