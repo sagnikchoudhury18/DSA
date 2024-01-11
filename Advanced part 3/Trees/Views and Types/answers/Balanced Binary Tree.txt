@@ -1,0 +1,35 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+
+        int balanced = 1;
+        public int isBalanced(TreeNode A) {
+            postOrderTraversal(A);
+            return balanced;
+        }
+        
+        public int postOrderTraversal(TreeNode root){
+        if(root == null)
+            return -1;//for height only I always return -1 as an edge case and counter it by +1 at end 
+        int left = postOrderTraversal(root.left);
+        int right = postOrderTraversal(root.right);
+
+        if(Math.abs(left - right) > 1)
+            balanced = 0;
+
+        return Math.max(left,right) + 1;
+    }
+
+
+}

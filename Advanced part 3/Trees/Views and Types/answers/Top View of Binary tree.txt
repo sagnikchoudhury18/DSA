@@ -1,0 +1,70 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+class Pair {
+            TreeNode node;
+            int vtLevel;
+
+            Pair(TreeNode node, int vtLevel){
+                this.node = node;
+                this.vtLevel = vtLevel;
+            }
+    }
+public class Solution {
+    public ArrayList<Integer> solve(TreeNode A) {
+        HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+       Queue<Pair> q = new LinkedList<>();
+       q.add(new Pair(A,0));
+
+       int max = Integer.MIN_VALUE;
+       int min = Integer.MAX_VALUE;
+
+       while(q.size()>0){
+           Pair poll = q.poll();
+           TreeNode node = poll.node;
+           int level = poll.vtLevel;
+
+           max = Math.max(level,max);
+           min = Math.min(level,min);
+
+           if(node.left!=null){
+               Pair p1 = new Pair(node.left, level-1);
+               q.add(p1);
+           }
+            
+           if(node.right!=null){
+               Pair p2 = new Pair(node.right, level+1);
+               q.add(p2);
+           }
+
+           if(map.containsKey(level)){
+               ArrayList<Integer> list = map.get(level);
+               list.add(node.val);
+               map.put(level, list);
+           } else{
+                ArrayList<Integer> list = new ArrayList<Integer>();
+                list.add(node.val);
+                map.put(level,list);
+           }
+       }
+
+
+       ArrayList<Integer> ans = new ArrayList<>();
+       for (int i= min; i<=max; i++){
+           ans.add(map.get(i).get(0));
+       }
+
+       return ans;
+
+    }
+}
