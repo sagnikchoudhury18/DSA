@@ -1,3 +1,6 @@
+/*
+for this we use the contribution technique where we check a particular element and see in how many possible subsequences will the element be min or max*/
+
 public class Solution {
     public int solve(int[] A) { 
         double sum1=0;

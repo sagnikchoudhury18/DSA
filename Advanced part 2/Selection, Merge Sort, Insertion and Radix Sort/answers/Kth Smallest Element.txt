@@ -1,3 +1,8 @@
+/*
+We are using selection sort here where after each iteration of swap we place an element in its sorted pos
+
+Note: In case array is already sorted in that scenario swap count would be 0 and we will just return the Bth pos ele from the array*/
+
 public class Solution {
     // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
     public int kthsmallest(final int[] A, int B) {
