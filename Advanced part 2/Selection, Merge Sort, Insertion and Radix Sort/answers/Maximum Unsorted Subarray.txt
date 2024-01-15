@@ -1,3 +1,6 @@
+/* 
+Here we minimizie the start pos and mximize the end pos*/
+
 public class Solution {
     public int[] subUnsort(int[] A) {
         int[] l = Arrays.copyOf(A, A.length);

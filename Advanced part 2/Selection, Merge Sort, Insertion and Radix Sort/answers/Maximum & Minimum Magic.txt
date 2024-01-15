@@ -1,13 +1,37 @@
 public class Solution {
     public int[] solve(int[] A) {
+        //optimise solution intuition with example
+        //eg : [-5, -1, 15, 12, 20, 1]
+        //to get the sum of max abs diff the right pairs will be
+        //|-5-20| + |-1 - 15| + |1-12| = 52
+        //here we can see the pattern if we sort the array
+        //[-5,-1,1,12,15,20] n = 6
+        //|A[0] - A[n-0-1]| + |A[1] - A[n-1-1]| + |A[2] - A[n-2-1]|
+
+        //to get the min sum of abs diff the right pairs will be the consecutive numbers only
+        //|-5-(-1)| + |1-12| + |15-20| = 20
+        //|A[0] - A[1]| + |A[2] - A[3]| + |A[4] - A[5]|
+
+        int mod = 1000000007;
+        int n = A.length;
         Arrays.sort(A);
-        long min_magic = 0, max_magic = 0;
-        for(int i=1; i <A.length; i+=2){
-            min_magic += A[i]-A[i-1];
+        int max_magic_number = 0;
+        int min_magic_number = 0;
+       
+        //finding max
+        for(int i = 0 ; i < n/2; i++){
+            max_magic_number = (max_magic_number%mod +  Math.abs(A[i] - A[n-i-1])%mod)%mod;
         }
-        for(int i=0; i<A.length/2; i++){
-            max_magic += A[i+(A.length/2)] - A[i];
+
+        //finding min
+        for(int i = 0; i < n; i+=2){
+            min_magic_number = (min_magic_number%mod +  Math.abs(A[i] - A[i+1])%mod)%mod;
         }
-        return new int[] {(int)(max_magic%1000000007), (int)(min_magic%1000000007)};
+
+        int[] magic_number = new int[2];
+        magic_number[0] = max_magic_number;
+        magic_number[1] = min_magic_number;
+       
+        return magic_number;
     }
 }

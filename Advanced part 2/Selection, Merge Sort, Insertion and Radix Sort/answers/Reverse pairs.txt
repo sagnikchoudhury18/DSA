@@ -23,6 +23,7 @@ public class Solution {
         int p1 = start, p2 = mid+1, p3=0, count = 0;
         int[] temp = new int[end-start+1];
         
+        //this while loop is for doing the comparisons
         while(p1<=mid && p2<=end){
             if(A[p1]>2L*A[p2]){
                 count+=(mid-p1+1);
@@ -34,6 +35,7 @@ public class Solution {
 
         p1 = start; p2=mid+1;
 
+        //this is for sorting  each array in its sorted form
         while(p1<=mid && p2<=end){
             if(A[p1]>A[p2]){
                 temp[p3] = A[p2];

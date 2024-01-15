@@ -1,3 +1,10 @@
+/*
+This would be solved using th eidea of merge sort.
+Whenever we merge 2 arrays at alevel we make a check to calc the no. of inversions betw the 2 arrays at that level.
+This computed val needs to be passed further up the during traversing back.
+
+Once the 2 arrays are sorted in the temp array, we put the elements in its correct place in the original arrray A based on the index of start and end */
+
 public class Solution {
     public int solve(int[] A) {
         int res = invert(A, 0, A.length-1);
