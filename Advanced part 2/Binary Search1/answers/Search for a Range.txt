@@ -1,3 +1,6 @@
+/* for one iteration keep moving left
+Next keep moving right */
+
 public class Solution {
     // DO NOT MODIFY THE LIST. IT IS READ ONLY
     public ArrayList<Integer> searchRange(final List<Integer> A, int B) {
