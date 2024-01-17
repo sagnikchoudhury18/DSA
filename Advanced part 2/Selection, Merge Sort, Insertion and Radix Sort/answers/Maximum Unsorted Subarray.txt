@@ -1,5 +1,5 @@
 /* 
-Here we minimizie the start pos and mximize the end pos*/
+Here we minimizie the start pos and maximize the end pos in reference to a sorted array*/
 
 public class Solution {
     public int[] subUnsort(int[] A) {

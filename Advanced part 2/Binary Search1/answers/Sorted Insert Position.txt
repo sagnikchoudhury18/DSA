@@ -1,3 +1,10 @@
+/*
+In this we do a binary search and check for the following cond:
+1. if the ele is found
+2. if we reach the 0th or size-1 pos in an attem,pt to search the element
+3. if for a given ele which lies betw mid-1 and mid
+*/
+
 public class Solution {
     public int searchInsert(int[] A, int B) {
         int l = 0, h=A.length-1;
