@@ -1,0 +1,47 @@
+public class Solution {
+    public int solve(int[] A, int B) {
+        //to get the window size by getting total ele which are good
+        int k = 0;
+        for (int i=0; i<A.length; i++){
+            if(A[i]<=B){
+                k+=1;
+            }
+        }
+        
+        if (k==0 || k==A.length || k==1) {
+            return 0;
+        }
+
+        //System.out.println("k " + k);
+        //Calc no. of bad elements in the first window
+        int countBadElements = 0;
+        for (int i=0; i<k; i++){
+            if(A[i]>B){
+                countBadElements+=1;
+            }
+        }
+        //System.out.println("countBadElements " + countBadElements);
+
+        //Store the count in ans
+        int ans = countBadElements;
+        //System.out.println("ans " + ans);
+
+        //Now use sliding window to find the window with least no. of goodElements
+        int s = 1, e = k;
+        
+        while(e<A.length){
+            if (A[s-1]>B){
+                countBadElements-=1;
+            } 
+            if (A[e]>B) {
+                countBadElements+=1;
+            }
+            if (countBadElements<ans){
+                ans = countBadElements;
+            }
+            s+=1;
+            e+=1;
+        }
+        return ans;
+    }
+}

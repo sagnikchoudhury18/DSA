@@ -6,6 +6,10 @@
  *     ListNode(int x) { val = x; next = null; }
  * }
  */
+
+/*
+ we will take a prev curr and next pointer and just keep reversing the pointer linkage
+*/
 public class Solution {
     public ListNode reverseList(ListNode A) {
         ListNode prev = null;

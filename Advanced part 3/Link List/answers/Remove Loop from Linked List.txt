@@ -6,6 +6,13 @@
  *     ListNode(int x) { val = x; next = null; }
  * }
  */
+/*
+1. Take a slow and fast pointer
+2. They will meet at some point in the loop
+3. next take a new pointer from the starting point in the list  and continue traversing the other pointer which we used in point 2. They will meet right at the place where the loop is to be removed
+4. next start from this pos and remove the loop
+*/
+
 public class Solution {
     public ListNode solve(ListNode A) {
         if(A==null){

@@ -1,0 +1,27 @@
+public class Solution {
+    public int maxArr(ArrayList<Integer> A) {
+        int max1=Integer.MIN_VALUE; 
+        int min1=Integer.MAX_VALUE;
+        int max2=Integer.MIN_VALUE;
+        int min2=Integer.MAX_VALUE;
+        for(int l=0; l<A.size(); l++){
+            if(A.get(l)+l>max1){
+                max1 = A.get(l)+l;
+            }
+            if(A.get(l)+l+1<min1){
+                min1 = A.get(l)+l;
+            }
+            if(A.get(l)-l>max2){
+                max2 = A.get(l)-l;
+            }
+            if(A.get(l)-l<min2){
+                min2 = A.get(l)-l;
+            }
+        }
+        // System.out.println(max1);
+        // System.out.println(min1);
+        // System.out.println(max2);
+        // System.out.println(min2);
+        return Math.max(max1-min1, max2-min2);
+    }
+}

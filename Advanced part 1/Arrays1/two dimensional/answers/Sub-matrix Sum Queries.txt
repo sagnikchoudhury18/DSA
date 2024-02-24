@@ -1,0 +1,52 @@
+public class Solution {
+    public int[] solve(int[][] A, int[] B, int[] C, int[] D, int[] E) {
+        buildPrefixSum(A);
+        int[] ans = new int[B.length];
+        for(int i = 0; i<B.length; i++){
+            int i1= B[i]-1;
+            int j1= C[i]-1;
+            int i2= D[i]-1;
+            int j2= E[i]-1;
+            int sum = A[i2][j2];
+           
+            // delete left
+            if(j1>0){
+                sum = (sum - A[i2][j1-1])%1000000007;
+            }
+            // delete top
+            if(i1>0){
+                sum = (sum - A[i1-1][j2])%1000000007;
+            }
+             // add one corner because it will delete twice
+            if(i1>0 && j1>0){
+                sum = (sum + A[i1-1][j1-1])%1000000007;
+            }
+            if(sum<0){
+                sum += 1000000007;
+            }
+            ans[i] = sum;
+        }
+        return ans;
+    }
+
+    public void buildPrefixSum(int[][] A){
+       // build a prefix matrix so that we can calculate for multiple queries
+        // first calcualte row wise sum
+        for(int i =0; i<A.length; i++){
+            for(int j =0; j<A[0].length; j++){
+                if(j!=0){
+                    A[i][j] =(A[i][j] + A[i][j-1])%100000007;
+                }
+            }
+        }
+        // col wise sum
+        for(int j =0; j<A[0].length; j++){
+            for(int i =0; i<A.length; i++){
+                if(i!=0){
+                    A[i][j] =(A[i][j] + A[i-1][j])%1000000007;
+                }
+            }
+        }
+       
+    }
+}
