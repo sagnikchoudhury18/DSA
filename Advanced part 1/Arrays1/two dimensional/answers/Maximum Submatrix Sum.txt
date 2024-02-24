@@ -1,0 +1,35 @@
+public class Solution {
+    public long solve(int[][] A) {
+        int M = A[0].length;
+        int N = A.length;
+        long ans = Long.MIN_VALUE;
+        for(int start =0; start<N; start++){
+            long[] arr=new long[M];
+            for(int end=start; end<N; end++){
+                for (int i=0; i<M; i++){
+                    arr[i] = arr[i] + A[end][i];
+                }
+                ans = Math.max(ans, Kadanes(arr,M));
+            }
+        }
+        return ans;
+
+    }
+
+      //Kadenes Algorithm.....
+    public long Kadanes(long[] arr, int M){
+        long sum=0;
+        long maxSum=Integer.MIN_VALUE;
+
+        for (int i=0; i<M; i++){
+            if (sum<0) {
+                sum=0;
+            }
+            sum+=arr[i];
+            maxSum = Math.max(maxSum, sum);
+            
+        }
+        return maxSum;
+    }
+
+}

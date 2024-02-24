@@ -1,0 +1,26 @@
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public int maxSubArray(final List<Integer> A) {
+        int ans = Integer.MIN_VALUE;
+        int sum = 0;
+        for (int i=0; i<A.size(); i++){
+            sum += A.get(i);
+            if(sum<0){
+                sum = 0;
+            } else {
+                if (sum>ans){
+                    ans = sum;
+                }
+            }
+        }
+        // if all elements in list are negative find max among them
+        if (ans == Integer.MIN_VALUE){
+            for(int i=0; i<A.size(); i++){
+                if(A.get(i)>ans){
+                    ans = A.get(i);
+                }
+            }
+        }
+        return ans;
+    }
+}

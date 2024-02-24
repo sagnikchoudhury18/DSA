@@ -1,0 +1,20 @@
+public class Solution {
+    public int solve(int[] A) {
+         int count=0;
+        int N=A.length;
+        int s=0;
+        while(s<N){
+            if(A[s]!=s){
+                count++;
+                int temp=A[A[s]];
+                A[A[s]]=A[s];
+                A[s]=temp;
+            }
+            else s++;
+        }
+        // for (int i: A){
+        //     System.out.println(i);
+        // }
+        return count;
+    }
+}
