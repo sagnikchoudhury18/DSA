@@ -1,0 +1,39 @@
+public class Solution {
+    // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+    public int trap(final int[] A) {
+        int[] lmax = new int[A.length];
+        int[] rmax = new int[A.length];
+        
+        lmax[0] = A[0];
+        int leftMax = lmax[0];
+        for(int i=1; i<A.length; i++){
+            if(A[i]>leftMax){
+                lmax[i] = A[i];
+                leftMax = A[i];
+            } else {
+                lmax[i] = leftMax;
+            }
+        }
+
+        rmax[A.length-1] = A[A.length-1];  
+        int rightMax = rmax[A.length-1];
+        for(int i=A.length-1; i>=0; i--){
+            if(A[i]>rightMax){
+                rmax[i] = A[i];
+                rightMax = A[i];
+            } else {
+                rmax[i] = rightMax;
+            }
+        }
+
+        int ans = 0;
+        for (int i=1; i<A.length-1; i++){
+            int netHeight = Math.min(lmax[i-1], rmax[i+1]) - A[i];
+            if (netHeight>0){
+                ans+=netHeight;
+            }
+        } 
+
+        return ans;
+    }
+}
