@@ -1,0 +1,18 @@
+public class Solution {
+    public int solve(int[] A) {
+        int sum = 0;
+        int n = A.length;
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int i=0;i<n;i++){
+            pq.add(A[i]);
+        }
+        while(pq.size()>1){
+            int val1 = pq.remove();
+            int val2 = pq.remove();
+            int num = val1+val2;
+            sum += num;
+            pq.add(num);
+        }
+        return sum;
+    }
+}

@@ -1,0 +1,15 @@
+public class Solution {
+    public int nchoc(int A, int[] B) {
+        long res = 0, mod = 1000000007;
+        PriorityQueue<Integer> p = new PriorityQueue<>(Collections.reverseOrder());
+        for (int i=0; i<B.length; i++){
+            p.add(B[i]);
+        }
+        for(int i=0; i<A; i++){
+            int t = p.poll();
+            p.add((int)Math.floor(t/2));
+            res= (res+t)%mod;
+        }
+        return (int)(res%mod);
+    }
+}
