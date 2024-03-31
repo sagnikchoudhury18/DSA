@@ -1,0 +1,43 @@
+public class Solution {
+    public int[] solve(int A, int B, int[] C) {
+         int n = C.length;
+        int ans[] = new int[2];
+       
+        PriorityQueue<Integer> pqmax = new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue<Integer> pqmin = new PriorityQueue<>();
+
+        // Populate the priority queues
+        for (int i = 0; i < n; i++) {
+            pqmax.add(C[i]);
+            pqmin.add(C[i]);
+        }
+
+        int max = 0;
+        int min = 0;
+        int a = A;
+
+        // Pick elements from the max heap
+        while (A > 0 && !pqmax.isEmpty()) {
+            max += pqmax.peek();
+            pqmax.add(pqmax.peek()-1);
+            pqmax.remove();
+            A--;
+        }
+
+        // Pick elements from the min heap
+        while (a > 0 && !pqmin.isEmpty()) {
+            min += pqmin.peek();
+            if (pqmin.peek() == 1) {
+                pqmin.remove();
+            } else {
+                pqmin.add(pqmin.poll() - 1);
+            }
+            a--;
+        }
+
+        ans[0] = max;
+        ans[1] = min;
+
+        return ans;
+    }
+}

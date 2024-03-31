@@ -1,0 +1,57 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+    boolean partitionPossible = false;
+    public int solve(TreeNode A) {
+        long totalSum1 = totalSum(A);
+
+        compute(A, totalSum1);
+        
+        if(partitionPossible == true){
+            return 1;
+        } else {
+            return 0;
+        }
+
+    }
+
+    public long totalSum(TreeNode root){
+        if (root==null){
+            return 0;
+        }
+
+        long left = totalSum(root.left);
+        long right = totalSum(root.right);
+        return root.val + left + right;
+    }
+
+    public long compute(TreeNode root, long sum){
+        if(root == null){
+            return 0;
+        }
+
+        long left = compute(root.left, sum);
+        long right = compute(root.right, sum);
+
+        if(sum - (root.val+left+right) == root.val + left +right){
+            partitionPossible = true;
+        }
+
+        return root.val + left + right;
+
+
+
+
+    }
+}

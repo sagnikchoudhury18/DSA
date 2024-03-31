@@ -1,0 +1,42 @@
+public class Solution {
+    public int seats(String A) {
+        int mod = 10000003, pos = 0;
+        List<Integer> elementsPos = new ArrayList<>();
+        for(int i=0; i<A.length(); i++){
+            if(A.charAt(i)=='x'){
+                elementsPos.add(i);
+            }
+        }
+        if(elementsPos.size()==0){
+            return 0;
+        }
+
+        if (elementsPos.size() % 2 == 0) {
+            pos = elementsPos.size() / 2 - 1;
+        } else {
+            pos = elementsPos.size() / 2;
+        }
+
+        int medianElementPos = elementsPos.get(pos);
+        //System.out.println("Median pos: " + medianElementPos);
+
+        int ans = 0;
+        int rightToMedian = medianElementPos+1;
+        for(int i=rightToMedian; i<A.length(); i++){
+             if(A.charAt(i)=='x'){
+                ans=(ans+Math.abs(i-rightToMedian))%mod;
+                rightToMedian+=1;
+            }
+        }
+
+        int leftToMedian = medianElementPos-1;
+        for(int i=leftToMedian; i>=0; i--){
+            if(A.charAt(i)=='x'){
+                ans=(ans+Math.abs(leftToMedian-i))%mod;
+                leftToMedian-=1;
+            }
+        }
+
+        return ans%mod;
+    }
+}

@@ -1,0 +1,53 @@
+public class Solution {
+    class Pair {
+        int time, profit;
+        Pair(int x, int y){
+            time = x;
+            profit = y;    
+        }
+    }
+
+    public int solve(int[] A, int[] B) {
+
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
+        List<Pair> cars = new ArrayList<>();
+        
+        for(int i=0; i<A.length; i++){
+            Pair p = new Pair(A[i], B[i]);
+            cars.add(p);
+        }
+        Collections.sort(cars, new sortTime());
+        
+        int time=0;
+        long profit = 0, mod = 1000000007;
+
+        for(int i=0; i<A.length; i++){
+            Pair p=cars.get(i);
+            if (time<p.time){
+                profit= (profit+p.profit)%mod;
+                time+=1;
+                heap.add(p.profit);
+            } else {
+                if(heap.peek() < p.profit){
+                    profit -= heap.poll();
+                    profit = (profit + p.profit)%mod;
+                    heap.add(p.profit);
+                }
+            }
+            profit %= mod;
+            //System.out.println("time: " + time + "  " + "Profit: " + profit);
+        }
+        // for (Pair pair : list) {
+        // // Process or print pair.start and pair.end
+        // System.out.println("Pair: (" + pair.time + ", " + pair.profit + ")");
+        // }
+        return (int)profit;
+        
+    }
+
+    public class sortTime implements Comparator<Pair> {
+        public int compare(Pair a, Pair b){
+            return (a.time - b.time);
+        }
+    }
+}
