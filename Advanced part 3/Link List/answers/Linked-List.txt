@@ -1,61 +1,88 @@
-public static class ListNode{
+static class ListNode {
         int val;
         ListNode next;
-        ListNode(int val){
-            this.val=val;
-            next=null;
+
+        public ListNode (int val) {
+            this.val = val;
         }
     }
-    static ListNode head=null;
-    static int size=0;//global size variable
-    public static void insert_node(int pos, int value) {
+
+    static int size = 0;
+    static ListNode head = null;
+    static ListNode tail = null;
+
+    public static void insert_node(int position, int value) {
         // @params position, integer
         // @params value, integer
-        if(pos==1){
-            ListNode node=new ListNode(value);
-            node.next=head;
-            head=node;
-        }else if(pos>size+1){
-            return;
-        }else{
-            ListNode node=new ListNode(value);
-            ListNode t=head;//create temporary
-            for(int i=1;i<pos-1;i++){//traverse temp to pos-1th place;
-                t=t.next;
-                System.out.println(t.val);
-            }
-            node.next=t.next;
-            t.next=node;
+        ListNode node = new ListNode(value);
 
+        if (position == 1 && head == null && tail == null) {    //1}
+            node.next = null;
+            head = node;
+            tail = node;
         }
-        size++;//when ever insert function get called size also get increment
-               //except pos>size+1..so that time retuen our code
+        else if (position == 1) {   //2}
+            node.next = head;
+            head = node;
+        }
+        else if (position == size+1) {  //3}
+            tail.next = node;
+            tail = node;
+        }
+        else if (position >= 2 && position <= size){    //4}
+            int count = 0;
+            ListNode curr = head;
+            ListNode prev = null;
+            while (curr != null && count + 1 < position) {
+                prev = curr;
+                curr = curr.next;
+                count++;
+            }
+            node.next = curr;
+            prev.next = node;        
+        } else {
+            size--;
+        }
+
+        size++;
     }
 
-    public static void delete_node(int pos) {
+    public static void delete_node(int position) {
         // @params position, integer
-        if(pos==1){
-            head=head.next;
-        }
-        else if(pos>size){
-            return;
-        }
-        else{
-            ListNode t=head;
-            for(int i=1;i<pos-1;i++){
-                t=t.next;
+        if (position == 1) {    //6}
+            head = head.next;
+        }  
+        else if (position >= 2 && position <= size){    //7}
+            ListNode prev = null;
+            ListNode curr = head;
+            int count = 0;
+            while (curr != null && count + 1 < position) {  
+                prev = curr;
+                curr = curr.next;
+                count++;
             }
-            t.next=t.next.next;
+
+            prev.next = curr.next;
+            if (size == position) { //8}
+                tail = prev;
+            }
+        } else {
+            size++;
         }
-         size--;//when ever delete function get called so that size also should decrement
+
+        size--;
     }
 
     public static void print_ll() {
         // Output each element followed by a space
-        ListNode t=head;
-        while(t.next!=null){
-            System.out.print(t.val+" ");//after last data it will create a space..
-            t=t.next;
+        ListNode curr = head;
+        while (curr != null) {
+            if (curr.next == null) {
+                System.out.print(curr.val);
+            }
+            else {
+                System.out.print(curr.val + " ");
+            }
+            curr = curr.next;
         }
-        System.out.print(t.val);//it will avoid rhe space at last
     }

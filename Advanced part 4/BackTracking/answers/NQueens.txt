@@ -1,0 +1,58 @@
+public class Solution {
+    ArrayList<ArrayList<String>> ans=new ArrayList<>();
+    public ArrayList<ArrayList<String>> solveNQueens(int A) {
+        int matrix[][] = new int[A][A];
+        for(int i=0; i<A; i++){
+            for(int j=0; j<A; j++){
+                matrix[i][j]=0;
+            }
+        }
+
+        boolean c[] = new boolean[A];
+        boolean leftDiagonal[] = new boolean[2*A+1];
+        boolean rightDiagonal[] = new boolean[2*A+1];
+
+        solve(matrix,0,A,c,leftDiagonal,rightDiagonal);
+        return ans;
+         
+    }
+
+    public void solve(int[][] matrix, int row, int A, boolean[] c, boolean[] leftDiagonal, boolean[] rightDiagonal){
+        if(row==A){
+            ArrayList<String> temp=new ArrayList<>();
+            //store matrix as string in temp
+            for(int i=0;i<matrix.length;i++){
+                String str="";
+                for(int j=0;j<matrix[0].length;j++){
+                    if(matrix[i][j]==1){
+                    str=str+"Q";
+                    }
+                    else{
+                    str= str+".";
+                    }       
+                }
+                temp.add(str);
+            }
+            ans.add(temp);
+        }
+
+        for(int col=0; col<A; col++){
+            boolean safe =false;
+            if(c[col]==false && leftDiagonal[row+col]==false && rightDiagonal[row-col+matrix.length-1] ==false){
+                safe = true;
+            }
+
+            if(safe == true){
+                matrix[row][col]=1;
+                c[col]=true;
+                leftDiagonal[row+col]=true;
+                rightDiagonal[row-col+matrix.length-1]=true;
+                solve(matrix,row+1,A,c,leftDiagonal,rightDiagonal);
+                matrix[row][col]=0;
+                c[col]=false;
+                leftDiagonal[row+col]=false;
+                rightDiagonal[row-col+matrix.length-1]=false;
+            }
+        }
+    }
+}
