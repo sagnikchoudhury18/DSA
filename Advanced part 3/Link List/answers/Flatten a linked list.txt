@@ -1,0 +1,34 @@
+/*
+class ListNode {
+    int val;
+    ListNode right, down;
+    ListNode(int x) {
+        val = x;
+        right = down = null;
+    }
+}
+*/
+
+ListNode merge(ListNode a, ListNode b){
+    if(a==null){
+        return b;
+    } else if(b==null){
+        return a;
+    }
+    ListNode res;
+    if(a.val<b.val){
+        res = a;
+        res.down = merge(a.down, b);
+    } else {
+        res.right = b;
+        res.down = merge(a,b.down);
+
+    }
+    return res;
+}
+ListNode flatten(ListNode root) {
+    if(root==null || root.right==null){
+        return root;
+    }
+    return merge(root, flatten(root.right));    
+}
