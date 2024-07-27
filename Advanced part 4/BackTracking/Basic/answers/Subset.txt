@@ -1,0 +1,27 @@
+public class Solution {
+
+    ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+
+    public ArrayList<ArrayList<Integer>> subsets(ArrayList<Integer> A) {
+
+        Collections.sort(A);
+        result.add(new ArrayList<>());
+        generateSubsets(0, new ArrayList<>(), A);
+
+        return result;
+        
+    }
+
+    public void generateSubsets(int i,  ArrayList<Integer> list, ArrayList<Integer> A) {
+        if(i == A.size()){
+            return;
+        }
+
+        list.add(A.get(i));
+        result.add(new ArrayList(list));
+        generateSubsets(i+1, list, A);
+
+        list.remove(list.size()-1);
+        generateSubsets(i+1, list, A);
+    }
+}

@@ -1,0 +1,68 @@
+public class Solution {
+    public int solve(int[][] A) {
+        int M = A.length;
+        int N =A[0].length;
+        int []curr_row=A[0]; // to put row 0 in a array..
+        int max_area =histogram(curr_row);
+        for(int i=1;i<M;i++){
+            for(int j=0;j<N;j++){
+                if(A[i][j]==1)
+                    curr_row[j]+=1;
+                else
+                    curr_row[j]=0;
+                                 }
+            int currAns= histogram(curr_row);
+
+            max_area= Math.max(max_area,currAns);
+                            }
+        return  max_area;
+    }
+
+      public int histogram(int []A){
+        int []LS = smallest_left(A);
+        int []RS= smallest_right(A);
+        int max =-2;
+        for(int i=0;i<A.length;i++){
+           
+            int width = RS[i] - LS[i]-1;
+            int area = A[i] *width;
+            max= Math.max(max,area);
+
+
+        }
+        return max;
+
+    }
+    public  int[] smallest_left(int []A){
+        int []ans= new int[A.length];
+        Stack<Integer> stk = new Stack<>();
+        for(int i=0;i<A.length;i++){
+            while(!stk.isEmpty()&& A[i]<=A[stk.peek()] )
+                stk.pop();
+            if(stk.isEmpty())
+               ans[i]=-1;
+            else
+                ans[i]=stk.peek();
+
+            stk.push(i);
+
+        }
+        return ans;
+    }
+    public  int[] smallest_right(int []A){
+         int []ans= new int[A.length];
+        Stack<Integer> stk = new Stack<>();
+        for(int i=A.length-1;i>=0;i--){
+            while(!stk.isEmpty()&& A[i]<=A[stk.peek()] )
+                stk.pop();
+            if(stk.isEmpty())
+               ans[i]=A.length;
+            else
+                ans[i]=stk.peek();
+
+            stk.push(i);
+
+        }
+        return ans;
+    }
+}

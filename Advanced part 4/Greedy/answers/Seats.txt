@@ -1,3 +1,4 @@
+/* In this get the median pos of x so that we have equal no of x on left and right*/
 public class Solution {
     public int seats(String A) {
         int mod = 10000003, pos = 0;

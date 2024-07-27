@@ -1,3 +1,10 @@
+/*
+Height of the rectangle must be equal to height of any one bar
+
+Get the nearest smaller to the left and nearest smaller to the right. Now area would be A[i] * [(nsL+1), (nsR-1)]
+
+Over here we first find the smallest element for each element to its left and then to its right. In the stack we are storing the location or ith index for the smallest element for an ele to its left and right
+*/
 public class Solution {
     public int largestRectangleArea(int[] A) {
         if(A.length==1){
