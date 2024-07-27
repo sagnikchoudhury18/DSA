@@ -1,0 +1,24 @@
+public class Solution {
+
+    ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+    
+    public ArrayList<ArrayList<Integer>> subsetsWithDup(ArrayList<Integer> A) {
+    
+        Collections.sort(A);
+        generate_Subsets(A , 0 , new ArrayList<>());
+        return result;
+    }
+
+    public void generate_Subsets(ArrayList<Integer> A, int index, List<Integer> subset) {
+        
+        result.add(new ArrayList<>(subset)); // Add the current subset to the result in each recursive call
+        for (int i = index; i < A.size(); i++) {
+            if (i > index && A.get(i).equals(A.get(i - 1))) {
+                continue; // Skip duplicates to avoid generating duplicate subsets
+            }
+            subset.add(A.get(i)); // Add the current element in the subset
+            generate_Subsets(A, i + 1, subset); // Recursively generate subsets starting from the next index
+            subset.remove(subset.size() - 1); // Remove the last element to backtrack and explore other possibilities
+        }
+    }
+}

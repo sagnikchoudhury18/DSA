@@ -1,4 +1,11 @@
 /**
+1. Insert nodes in betw
+2. copy random pointers
+3. separate out the list
+**/
+
+
+/**
  * Definition for singly-linked list with a random pointer.
  * class RandomListNode {
  *     int label;
