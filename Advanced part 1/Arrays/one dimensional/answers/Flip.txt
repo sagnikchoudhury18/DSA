@@ -32,11 +32,12 @@ public class Solution {
         int sum = 0, maxSum = Integer.MIN_VALUE, tsi = 0, ei = 0, fsi=0;
         
         for(int i=0; i<arr.length; i++){
-            sum+=arr[i];
+            
             if (sum<0){
                 sum = 0;
                 tsi = i;
             }
+            sum+=arr[i];
             
             if(maxSum<sum){
                 maxSum = sum;
