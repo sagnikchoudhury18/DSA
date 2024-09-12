@@ -11,39 +11,22 @@ public class Solution {
     public ArrayList<Interval> merge(ArrayList<Interval> intervals) {
         // Sorting the intervals first based on start point and then based on end point.
         Collections.sort(intervals, new IntervalComp());
-        
-        //res is the ArrayList that we will return
-        ArrayList<Interval> res;
-        
-        Interval inter;
-        int n = intervals.size();
-        res = new ArrayList<>();
-        
-        for (int i = 0; i < n;) {
-            // making a new segment
-            inter = new Interval(intervals.get(i).start, intervals.get(i).end);
-            Interval next;
-            i++;
-            while (i < n) {
-                next = intervals.get(i);
-                // Checking if i-th element falls in the current segment
-                if (overlap(inter, next)) {
-                    // adding i-th element to the current segment
-                    inter.end = Math.max(inter.end, next.end);
-                    i++;
-                } else {
-                    break;
-                }
+
+        int curr_start = intervals.get(0).start;
+        int curr_end = intervals.get(0).end;
+        ArrayList<Interval> ans = new ArrayList<Interval>();
+        for(int i=1;i<intervals.size();i++){
+            if(curr_end >=intervals.get(i).start){
+                curr_end=Math.max(curr_end,intervals.get(i).end);
+            } else{
+                ans.add(new Interval(curr_start,curr_end));
+                curr_start=intervals.get(i).start;
+                curr_end = intervals.get(i).end;
             }
-            // adding current segment to our answer.
-            res.add(inter);
         }
-        return res;
-    }
-    private boolean overlap(Interval int1, Interval int2) {
-        if (int1.end >= int2.start)
-            return true;
-        return false;
+        ans.add(new Interval(curr_start,curr_end));
+        return ans;
+        
     }
     
     private class IntervalComp implements Comparator<Interval> {
