@@ -1,0 +1,33 @@
+import java.util.HashMap;
+
+public class Solution {
+    public int solve(int[] A, int B) {
+        // Define the modulo value
+        int MOD = 1000000007;
+        
+        // HashMap to store the frequency of each element
+        HashMap<Integer, Integer> freqMap = new HashMap<>();
+        int count = 0;
+        
+        // Traverse the array
+        for (int i = 0; i < A.length; i++) {
+            int complement = B - A[i]; // Calculate the complement
+
+            // Check if complement exists in the map and only count pairs where i != j
+            // This is ensured because we are checking complement in the past values.
+            if (freqMap.containsKey(complement)) {
+                count = (count + freqMap.get(complement)) % MOD;
+            }
+
+            // Update the frequency map with A[i] using an if-else condition
+            if (freqMap.containsKey(A[i])) {
+                freqMap.put(A[i], freqMap.get(A[i]) + 1);
+            } else {
+                freqMap.put(A[i], 1);
+            }
+        }
+        
+        // Return the total count of pairs modulo 10^9+7
+        return count;
+    }
+}
