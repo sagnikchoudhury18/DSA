@@ -13,20 +13,28 @@
  */
 public class Solution {
 
-    int max = Integer.MIN_VALUE;
+    int globalMax = Integer.MIN_VALUE;
     public int maxPathSum(TreeNode A) {
-           solve(A);
-          return max;
+           find(A);
+          return globalMax;
     }
 
-    public int solve(TreeNode A) {
+    public int find(TreeNode A) {
         if(A==null){
             return 0;
         }
-        int l = Math.max(0, solve(A.left));
-        int r = Math.max(0, solve(A.right));
+        int l = find(A.left);
+        int r = find(A.right);
 
-        max = Math.max(max, l+r+A.val);
+        l = Math.max(0, l);
+        r = Math.max(0, r);
+
+        /* for a given node we will calculate the leftsum abd rightsum, if either is -v1 we mark as 0. Now there are 2 options:
+        1. This node can server as the pivot of the path so considering this we will cal the sum and store in max.
+        2. This node with wither of the left or right path whichever has a greater sum would contribute to the global max sum path.
+        */
+
+        globalMax = Math.max(globalMax, l+r+A.val);
 
         return A.val+Math.max(l, r);
     }
