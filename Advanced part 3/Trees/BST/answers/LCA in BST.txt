@@ -1,0 +1,39 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+    public int solve(TreeNode A, int B, int C) {
+          
+	TreeNode curr=A;
+
+        while(curr !=null){
+
+            if(B<curr.val && C<curr.val){
+
+                curr=curr.left;
+
+            }else if(B>curr.val && C>curr.val){
+
+                curr=curr.right;
+
+            }else{
+
+               return curr.val;
+
+            }
+
+        }
+
+        return 0;
+    }
+}
