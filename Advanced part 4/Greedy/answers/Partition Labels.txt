@@ -1,0 +1,31 @@
+class Solution {
+    public List<Integer> partitionLabels(String s) {
+        List<Integer> sizeOfEachPartition = new ArrayList<Integer>();
+
+        for(int i=0; i<s.length();){
+
+            /*get first and last index of first character
+            after this start exploring from the next character .
+             At any moment if a character is unexplored and has last index greater than the already set end index then update the end index
+             */
+
+             int startIndex = i;
+             int endIndex = s.lastIndexOf(s.charAt(startIndex));
+
+             for(int j=startIndex+1; j<endIndex; j++){
+                int lastIndexOfNextChar = s.lastIndexOf(s.charAt(j));
+
+                if(lastIndexOfNextChar > endIndex){
+                    endIndex = lastIndexOfNextChar;
+                }
+             }
+            
+            sizeOfEachPartition.add(endIndex-startIndex+1);
+            i = endIndex+1;
+
+
+        }
+
+        return sizeOfEachPartition;
+    }
+}
