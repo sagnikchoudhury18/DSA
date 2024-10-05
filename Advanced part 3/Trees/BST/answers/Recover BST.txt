@@ -1,0 +1,61 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+
+    List<Integer> nodes = new ArrayList<>();
+
+    public ArrayList<Integer> recoverTree(TreeNode A) {
+
+        ArrayList<Integer> ans = new ArrayList<>();
+        
+        putInList(A);
+
+        //Case 1 & 2
+        int firstEle = -1, secondEle = -1;
+
+        for(int i=1; i<nodes.size(); i++){
+
+            if(nodes.get(i) < nodes.get(i-1)) {
+                if(firstEle == -1) {
+                    firstEle = nodes.get(i-1);
+                }
+                secondEle = nodes.get(i);  // This will be updated to the second swap
+            }
+            if(nodes.get(i)<nodes.get(i-1)){
+                secondEle = nodes.get(i);
+            }
+        }
+
+        ans.add(firstEle);
+        ans.add(secondEle);
+
+        Collections.sort(ans);
+
+        return (ans);
+
+
+        
+    }
+
+    public void putInList(TreeNode A) {
+        if (A == null) {
+            return;
+        }
+
+        // Recursively visit left, root, and then right (inorder)
+        putInList(A.left);
+        nodes.add(A.val);
+        putInList(A.right);
+    }
+}

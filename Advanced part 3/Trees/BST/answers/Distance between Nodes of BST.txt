@@ -1,0 +1,58 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+    public int solve(TreeNode A, int B, int C) {
+
+        TreeNode lca = findLCA(A, B, C);
+        return (findDepth(lca, B) + findDepth(lca, C));
+    }
+
+
+    public TreeNode findLCA(TreeNode A, int B, int C){
+
+        TreeNode lca = null;
+
+        TreeNode temp = A;
+        while(temp!=null){
+            if(B<temp.val && C<temp.val){
+                temp = temp.left;
+            } else if (B>temp.val && C>temp.val) {
+                temp = temp.right; 
+            } else {
+                lca = temp;
+                break;
+            }
+        }
+
+        return lca;
+    }
+
+    public int findDepth(TreeNode lca, int node){
+        TreeNode temp = lca;
+        int count = 0;
+        while (temp!=null){
+            if(node<temp.val){
+                count+=1;
+                temp = temp.left;
+            } else if (node > temp.val){
+                count+=1;
+                temp = temp.right;
+            } else {
+                return count;
+            }
+        }
+
+        return count;
+    }
+}

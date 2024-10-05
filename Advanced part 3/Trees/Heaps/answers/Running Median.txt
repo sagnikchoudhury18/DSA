@@ -1,0 +1,21 @@
+public class Solution {
+    public int[] solve(int[] A) {
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        int[] C = new int[A.length];
+        for(int i=0; i<A.length; i++){
+            minHeap.add(A[i]);
+            if(maxHeap.size()<minHeap.size()){
+                maxHeap.add(minHeap.poll());
+            }
+            else if(minHeap.peek()<maxHeap.peek()){
+                maxHeap.add(minHeap.poll());
+                minHeap.add(maxHeap.poll());
+            }
+            C[i] = maxHeap.peek();
+        }
+
+        return C;
+
+    }
+}
