@@ -1,0 +1,37 @@
+public class Solution {
+
+    class Pair {
+    int start,end;
+    Pair(int x,int y) {
+        start=x;
+        end=y;
+    }
+    }
+
+    public int solve(int[] A, int[] B) {
+        List<Pair> jobs = new ArrayList<>();
+        for(int i=0; i<A.length;i++){
+            Pair p = new Pair(A[i], B[i]);
+            jobs.add(p);
+        }
+
+        Collections.sort(jobs, new endTime());
+
+        int ans = 1, end_time_last_job = jobs.get(0).end;
+        for (int i=1;i<jobs.size();i++){
+            if(jobs.get(i).start>=end_time_last_job){
+                ans+=1;
+                end_time_last_job = jobs.get(i).end;
+            }
+        }
+        return ans;
+
+    }
+
+       
+    public class endTime implements Comparator<Pair> {
+        public int compare(Pair a, Pair b){
+            return (a.end - b.end);
+        }
+    }
+}
