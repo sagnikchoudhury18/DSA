@@ -1,0 +1,21 @@
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int max = Integer.MIN_VALUE, maxSumUptilNow = 0;
+        
+        for (int i = 0; i < nums.length; i++) {
+            maxSumUptilNow += nums[i];
+            
+            // Update max to store the largest sum encountered
+            if (maxSumUptilNow > max) {
+                max = maxSumUptilNow;
+            }
+            
+            // If the current sum goes below zero, reset it
+            if (maxSumUptilNow < 0) {
+                maxSumUptilNow = 0;
+            }
+        }
+        
+        return max;
+    }
+}
