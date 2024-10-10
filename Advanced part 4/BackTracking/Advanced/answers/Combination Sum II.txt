@@ -1,0 +1,46 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Solution {
+    ArrayList<ArrayList<Integer>> finalResult = new ArrayList<>();
+    
+    public ArrayList<ArrayList<Integer>> combinationSum(ArrayList<Integer> A, int B) {
+        // Step 1: Sort the array to avoid duplicates
+        Collections.sort(A);
+        
+        // Step 2: Backtracking to find all combinations
+        backtrack(A, B, 0, new ArrayList<>());
+        
+        return finalResult;
+    }
+
+    public void backtrack(ArrayList<Integer> A, int target, int index, ArrayList<Integer> current) {
+        // Base case: if target is zero, we found a valid combination
+        if (target == 0) {
+            finalResult.add(new ArrayList<>(current));
+            return;
+        }
+        
+        // Iterate through the array from the current index
+        for (int i = index; i < A.size(); i++) {
+            // If the current element exceeds the target, stop further exploration
+            if (A.get(i) > target) {
+                break;
+            }
+
+            // Skip duplicates in the sorted array
+            if (i > index && A.get(i).equals(A.get(i - 1))) {
+                continue;
+            }
+            
+            // Include the current element in the combination
+            current.add(A.get(i));
+            
+            // Recursive call with reduced target and move to the next index (i + 1) to ensure each number is used only once
+            backtrack(A, target - A.get(i), i + 1, current);
+            
+            // Backtrack: remove the last element from the current combination
+            current.remove(current.size() - 1);
+        }
+    }
+}
