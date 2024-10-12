@@ -1,0 +1,36 @@
+public class Solution {
+    public int wordBreak(String A, ArrayList<String> B) {
+        Set<String> wordDict = new HashSet<>(B);
+        // Create a memoization array to store the results of subproblems
+        Boolean[] memo = new Boolean[A.length()];
+        return canSegment(A, wordDict, 0, memo) ? 1 : 0;
+    }
+
+    // Helper function for backtracking with memoization
+    private boolean canSegment(String A, Set<String> wordDict, int start, Boolean[] memo) {
+        // If we've reached the end of the string, return true
+        if (start == A.length()) {
+            return true;
+        }
+
+        // If this subproblem has already been computed, return the stored result
+        if (memo[start] != null) {
+            return memo[start];
+        }
+
+        // Try to break the string starting from 'start' index
+        for (int end = start + 1; end <= A.length(); end++) {
+            // Check if the substring A[start:end] exists in the dictionary
+            if (wordDict.contains(A.substring(start, end))) {
+                // If found, recursively check for the remaining substring
+                if (canSegment(A, wordDict, end, memo)) {
+                    // Memoize the result and return true
+                    return memo[start] = true;
+                }
+            }
+        }
+
+        // If no valid segmentation is found, memoize and return false
+        return memo[start] = false;
+    }
+}
