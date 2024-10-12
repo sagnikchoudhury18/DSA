@@ -1,0 +1,28 @@
+public class Solution {
+    public int wordBreak(String A, ArrayList<String> B) {
+        Set<String> wordDict = new HashSet<>(B);
+        return canSegment(A, wordDict, 0) ? 1 : 0;
+    }
+
+    // Helper function for backtracking
+    private boolean canSegment(String A, Set<String> wordDict, int start) {
+        // If we've reached the end of the string, return true
+        if (start == A.length()) {
+            return true;
+        }
+
+        // Try to break the string starting from 'start' index
+        for (int end = start + 1; end <= A.length(); end++) {
+            // Check if the substring A[start:end] exists in the dictionary
+            if (wordDict.contains(A.substring(start, end))) {
+                // If found, recursively check for the remaining substring
+                if (canSegment(A, wordDict, end)) {
+                    return true;
+                }
+            }
+        }
+
+        // If no valid segmentation is found, return false
+        return false;
+    }
+}
