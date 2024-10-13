@@ -1,0 +1,27 @@
+public class Solution {
+    public int numDecodings(String A) {
+        int n = A.length();
+        if(n ==0 || A.charAt(0) == '0') return 0;
+        int[] dp = new int[n+1];
+        int m = 1000000007;
+        dp[0] = 1; // base case
+        // if string is empty then we have one way to form empty string
+
+        for(int i =1; i <= n ;i++){
+            //we take one char
+            if(A.charAt(i-1) != '0'){
+                dp[i] += dp[i-1] % m;
+            }
+            // we are checking if two char are possible
+            if(i >= 2 && isValid(A.substring(i-2,i))){
+                dp[i] += dp[i-2] % m;
+            }
+        }
+        return dp[n] % m;
+    }
+    public boolean isValid(String str){
+        int num = Integer.parseInt(str);
+        return (num >= 10 && num <= 26);
+    }
+}
+
