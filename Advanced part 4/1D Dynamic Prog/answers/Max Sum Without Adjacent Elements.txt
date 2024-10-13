@@ -1,0 +1,23 @@
+public class Solution {
+    int dp[];
+    public int adjacent(int[][] A) {
+        dp = new int[A[0].length];
+        Arrays.fill(dp, -1);
+        return maxNoAdjacent(A,A[0].length-1);
+    }
+
+    public int maxNoAdjacent(int[][] matrix, int i){
+        if(i<0){
+            return 0;
+        }
+        if(dp[i]!=-1){
+            return dp[i];
+        }
+        
+        int include = maxNoAdjacent(matrix, i-2) + Math.max(matrix[0][i], matrix[1][i]);
+        int exclude = maxNoAdjacent(matrix, i-1);
+        int ans = Math.max(include, exclude);
+        dp[i] = ans;
+        return ans; 
+    }
+}

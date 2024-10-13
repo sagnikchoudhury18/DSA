@@ -1,0 +1,15 @@
+public class Solution {
+    public int solve(int[] A, int B, int C, int D) {
+        int maxf = Integer.MIN_VALUE;
+        int maxs = Integer.MIN_VALUE;
+        int maxt = Integer.MIN_VALUE;
+    
+
+        for(int i=0; i<A.length; i++) {
+            maxf = Math.max(maxf, A[i]*B);
+            maxs = Math.max(maxs, A[i]*C + maxf); 
+            maxt = Math.max(maxt, A[i]*D + maxs);
+        }
+        return maxt;
+}
+}

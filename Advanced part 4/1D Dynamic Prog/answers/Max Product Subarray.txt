@@ -1,0 +1,16 @@
+public class Solution {
+    // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+    public int maxProduct(final int[] A) {
+        long min_So_Far=A[0]; // To handle higher absolute value when negative number occurs (say two negative becomes +ive) , min for array ending at index i
+        long max_So_Far=A[0]; // For positive  numbers, max for array ending at index i
+        long ans=A[0];
+        for(int i=1;i<A.length;i++){
+            long min_So_Far_local=Math.min(A[i],Math.min(A[i]*min_So_Far,A[i]*max_So_Far));
+            max_So_Far=Math.max(A[i],Math.max(A[i]*min_So_Far,A[i]*max_So_Far));
+            ans=Math.max(ans,max_So_Far);
+            min_So_Far=min_So_Far_local;
+           
+        }
+        return (int)ans;
+    }
+}
