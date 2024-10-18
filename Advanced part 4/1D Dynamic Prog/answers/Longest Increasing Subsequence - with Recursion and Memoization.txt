@@ -1,0 +1,47 @@
+import java.util.Arrays;
+
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int n = nums.length;
+        // Create a memoization table, initially filled with -1
+        int[][] memo = new int[n][n + 1]; // +1 because prevIndex can be -1
+        for (int[] row : memo) {
+            Arrays.fill(row, -1);
+        }
+        
+        // Start recursion from index 0 and previous index -1 (indicating no element taken yet)
+        return lengthOfLISRec(nums, 0, -1, memo);
+    }
+    
+    // Helper function with memoization
+    private int lengthOfLISRec(int[] nums, int currIndex, int prevIndex, int[][] memo) {
+        // Base case: when we reach the end of the array
+        if (currIndex == nums.length) {
+            return 0;
+        }
+        
+        // Check if result is already computed for this subproblem
+        if (memo[currIndex][prevIndex + 1] != -1) {
+            return memo[currIndex][prevIndex + 1];
+        }
+        
+        // Option 1: Skip the current element
+        int length = lengthOfLISRec(nums, currIndex + 1, prevIndex, memo);
+        
+        // Option 2: Include the current element if it forms an increasing subsequence
+        if (prevIndex == -1 || nums[currIndex] > nums[prevIndex]) {
+            length = Math.max(length, 1 + lengthOfLISRec(nums, currIndex + 1, currIndex, memo));
+        }
+        
+        // Memoize the result for the current subproblem
+        memo[currIndex][prevIndex + 1] = length;
+        
+        return length;
+    }
+    
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int[] nums = {10, 9, 2, 5, 3, 7, 101, 18};
+        System.out.println("Length of LIS: " + solution.lengthOfLIS(nums)); // Output: 4 (2, 3, 7, 101)
+    }
+}
